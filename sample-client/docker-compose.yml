@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  mockserver:
+    image: mockserver/mockserver
+    ports:
+      - 1080:1080
+    volumes:
+      - ./mocks/mockserver.properties:/config/mockserver.properties
+      - ./mocks/api-response.json:/config/api-response.json
+
+  client:
+    build:
+      context: .
+    image: client
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+    environment:
+      # - API_HOST=http://mockserver:1080
+      - API_HOST=http://localhost:1080
