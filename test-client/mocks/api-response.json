@@ -14,8 +14,7 @@
       "body": {
         "name": "Dog (mocked)",
         "fact": "Mocked fact",
-        "imgSrc": "http://localhost:1080/test-image.jpg",
-        "wiki": "http://localhost:1080/wiki"
+        "imgSrc": "http://localhost:1080/test-image.jpg"
       }
     }
   },

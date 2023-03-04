@@ -1,0 +1,6 @@
+**/node_modules
+test_results/
+test-client/.next/
+**/.vscode
+**/coverage/
+**/dist

@@ -1,6 +1,6 @@
 import path from 'path';
 import { name } from '../../package.json';
-import communications from '../../communications/sample-api'
+import communications from '../../communications/api'
 import {
   PactV3,
   SpecificationVersion,
@@ -13,7 +13,7 @@ const port = process.env.PACT_MOCK_SERVER_PORT as string;
 
 const provider = new PactV3({
   consumer: name,
-  provider: 'sample-api',
+  provider: 'api',
   log: path.resolve(process.cwd(), 'logs', 'pact.log'),
   logLevel: 'DEBUG',
   dir: path.resolve(process.cwd(), 'pacts'),
@@ -22,7 +22,7 @@ const provider = new PactV3({
   port: port,
 });
 
-describe('Sample API Pacts', () => {
+describe('API Pacts', () => {
   test('valid request', async () => {
     provider.addInteraction({
       states: [],

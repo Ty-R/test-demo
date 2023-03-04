@@ -1,46 +1,37 @@
 version: "3.9"
 
 services:
-  # api:
-  #   build: ./sample-api
-  #   image: api
-  #   ports:
-  #     - 3001:3001
-  #   environment:
-  #     - NODE_ENV=production
-  #   # Run the command from the build context
-  #   command: npm start
-
-
-  # api:
-  #   build:
-  #     context: ./sample-api
-  #     dockerfile: Dockerfile
-  #   image: api
-  #   ports:
-  #     - 3001:3001
-  #   # Run the command from the build context
-  #   command: npm start
-
-  client:
-    build: ./sample-client
-    image: client
-    ports:
-      - 3000:3000
+  api:
+    build: ./test-api
+    image: api
     environment:
       - NODE_ENV=production
-      # - API_HOST=http://api:1080
-      - API_HOST=http://localhost:3001
     # Run the command from the build context
+    command: npm start
+
+  client:
+    build:
+      context: ./test-client
+      dockerfile: Dockerfile
+    image: client
+    environment:
+      - NODE_ENV=production
+      - API_HOST=http://api:3001
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://client:3000"]
+    #   interval: 10s
+    #   timeout: 10s
+    #   retries: 5
     command: npm run dev
 
-  # test:
-  #   build:
-  #     context: .
-  #   image: test
-  #   volumes:
-  #     - .:/app
-  #   environment:
-  #     # - BASE_URL=http://client:3000
-  #     - API_HOST=http://localhost:3000
-  
+  test:
+    build:
+      context: .
+    image: test
+    volumes:
+      - .:/app
+    environment:
+      - BASE_URL=http://client:3000
+  #   # depends_on:
+  #   #   client:
+  #   #     condition: service_healthy
