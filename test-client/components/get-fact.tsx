@@ -21,7 +21,7 @@ function GetFact({ fetch }: { fetch: Function }) {
       {value.fact && (
         <div className={styles.container} data-testid="fact-container">
           <h3 data-testid="fact-heading-1">{value.name}</h3>
-          <img src={value.imgSrc} alt="animal" data-testid="fact-image"></img>
+          <img src={value.imgSrc} alt="animal" data-testid="fact-image" width="300"></img>
           <h4 data-testid="fact-heading-2">Fact</h4>
           <span data-testid="fact">{value.fact}</span>
         </div>

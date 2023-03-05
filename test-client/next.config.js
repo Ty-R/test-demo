@@ -7,7 +7,7 @@ const {
 
 module.exports = {
   images: {
-    domains: ['dog.ceo'],
+    domains: ['localhost', 'api'],
   },
   env: {
     API_HOST,

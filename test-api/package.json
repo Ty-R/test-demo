@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
+    "test": "NODE_ENV=test jest",
     "refresh-lock": "npm i --package-lock-only"
   },
   "dependencies": {
@@ -14,5 +15,9 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "jest": "^29.4.3",
+    "supertest": "^6.3.3"
   }
 }
