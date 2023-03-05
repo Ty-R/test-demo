@@ -18,13 +18,14 @@ Consisting of tools such as:
 * Pact
 * Playwright
 * BackstopJS
+* Supertest
 
 ### Progress
 
 | Type  ||
 | ------------- | ------------- |
 | API unit tests  | todo |
-| API component tests | todo |
+| API component tests | ✅ |
 | API integration  | todo |
 | UI component tests  | ✅ |
 | UI integration tests  | todo |
@@ -37,6 +38,9 @@ Consisting of tools such as:
 ```sh
 # Run system tests
 test-project $ docker-compose up
+
+# Run API component tests
+test-project/test-api $ npm test tests/component.test.js
 
 # Run FE unit tests
 test-project/test-client $ npm test
