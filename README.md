@@ -1,5 +1,7 @@
 # Test Playground
 
+![example workflow](https://github.com/Ty-R/test-demo/actions/workflows/build-and-test.yaml/badge.svg)
+
 A repository containing a simple NextJS frontend and Express API with the intention of testing them with a variety of approaches.
 
 > **Note**
