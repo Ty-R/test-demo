@@ -16,14 +16,14 @@ The frontend (`test-client/`) is driven by NextJS/React, and currently consists 
 
 The aim is to test this UI and API using a variety of different tools and techniques. It's worth bearing in mind that is will be an ongoing project to explore different approaches to testing, so some tests may overlap, and some areas may not yet be covered.
 
-| Service | Type of Testing | Tools/Techniques | Started |
+| Service | Type of Testing | Tools/Techniques | Status |
 | - | - | - | - |
-| UI | Unit tests | • React test lib<br>• Jest | ✅ |
+| UI | Unit tests | • React test lib<br>• Jest | Started |
 | UI | Integration tests | • Pact<br>• Jest<br>• Axios | -- |
-| UI | System tests | • Playwright | ✅ |
+| UI | System tests | • Playwright | Started |
 | UI | Visual tests | • BackstopJS | -- |
 | API | Unit tests | • Jest | -- |
-| API | Component tests | • Jest<br>• Supertest | ✅ |
+| API | Component tests | • Jest<br>• Supertest | Started |
 | API | Integration tests | • Pact<br>• Jest<br>• Axios | -- |
 
 ## Usage
