@@ -1,5 +1,6 @@
-const server = require('../app.js');
-const request = require('supertest');
+import server from '../app';
+import request from 'supertest';
+import { Response } from 'superagent';
 
 test('A request to an unknown endpoint', async () => {
   const response = await request(server).get('/not-a-real-endpoint');
@@ -12,7 +13,7 @@ test('A fact request for an unknown animal', async () => {
 });
 
 describe('A random fact request', () => {
-  let response;
+  let response: Response;
 
   beforeAll(async () => {
     response = await request(server).get('/fact');

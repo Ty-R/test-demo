@@ -1,46 +1,39 @@
-# Test Project
+# Test Playground
 
-A WIP repository containing a simple frontend and backend setup with the intention of demonstrating various different approaches to testing them. This isn't extensive, and there will certainly be overlap. It isn't strictly to demonstrate a better or worse approach, but to act as examples to particular approaches that may be fit for particular circumstances.
+A repository containing a simple NextJS frontend and Express API with the intention of testing them with a variety of approaches.
 
-The aim is to cover:
+> **Note**
+> This is an ongoing project. The application and tests within will certainly evolve as I learn more about best practices, or think of different challenges that I want to tackle.
 
-* Unit tests (both UI and API)
-* API component tests
-* Integration tests (both UI and API)
-  * Both offline test environments and consumer-driven contract approach
-* System tests against a connected FE and BE
-* UI visual testing
+## The Application
 
-Consisting of tools such as:
+The frontend (`test-client/`) is driven by NextJS/React, and currently consists of a single component for fetching a random fact about an animal and renders that fact alongside an image of the animal. The Express-driven API (`test-api/`) is responsible for returning a random animal fact.
 
-* Jest
-* React test library
-* Pact
-* Playwright
-* BackstopJS
-* Supertest
+> **Note**
+> To spin up the UI and API for local development, run: `docker-compose --profile local up`
 
-### Progress
+## Testing
 
-| Type  ||
-| ------------- | ------------- |
-| API unit tests  | todo |
-| API component tests | ✅ |
-| API integration  | todo |
-| UI component tests  | ✅ |
-| UI integration tests  | todo |
-| System tests | ✅ |
-| UI Visual tests | todo |
-| Contract tests | todo |
+The aim is to test this UI and API using a variety of different tools and techniques. It's worth bearing in mind that is will be an ongoing project to explore different approaches to testing, so some tests may overlap, and some areas may not yet be covered.
+
+| Service | Type of Testing | Tools/Techniques | Started |
+| - | - | - | - |
+| UI | Unit tests | • React test lib<br>• Jest | ✅ |
+| UI | Integration tests | • Pact<br>• Jest<br>• Axios | -- |
+| UI | System tests | • Playwright | ✅ |
+| UI | Visual tests | • BackstopJS | -- |
+| API | Unit tests | • Jest | -- |
+| API | Component tests | • Jest<br>• Supertest | ✅ |
+| API | Integration tests | • Pact<br>• Jest<br>• Axios | -- |
 
 ## Usage
 
 ```sh
 # Run system tests
-test-project $ docker-compose up
+test-project $ docker-compose --profile test up --abort-on-container-exit
 
 # Run API component tests
-test-project/test-api $ npm test tests/component.test.js
+test-project/test-api $ npm test
 
 # Run FE unit tests
 test-project/test-client $ npm test

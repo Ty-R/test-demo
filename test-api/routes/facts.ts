@@ -1,13 +1,13 @@
-const express = require('express');
+import express from 'express';
+import animals from '../mocks/response';
+
 const router = express.Router();
 
-const animals = require('../mocks/response');
-
-const randomItem = (items) => {
+const randomItem = (items: any[]) => {
   return items.sort(() => 0.5 - Math.random())[0];
 };
 
-const response = (animal) => {
+const response = (animal: { id: string; name: string; facts: string[]; image: string; }) => {
   return {
     name: animal.name,
     fact: randomItem(animal.facts),
@@ -31,4 +31,4 @@ router.get('/fact/:animal', async (req, res) => {
   res.json(response(animal));
 });
 
-module.exports = router;
+export default router;

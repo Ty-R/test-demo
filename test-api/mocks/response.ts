@@ -1,11 +1,12 @@
-require('dotenv').config();
+import * as dotenv from 'dotenv';
+dotenv.config()
 
 const {
   HOST,
   PORT
 } = process.env;
 
-module.exports = [
+export default [
   {
     id: 'dog',
     name: 'Dog (Canis familiaris)',
