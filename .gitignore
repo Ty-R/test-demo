@@ -1,5 +1,5 @@
 **/node_modules
-test_results/
+test-results/
 test-client/.next/
 **/.vscode
 **/coverage/
