@@ -2,7 +2,6 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import React from 'react';
 import GetFact from './get-fact';
 
-
 const mockFetch = jest.fn(async () => {
   return {
     name: 'animal',
@@ -24,7 +23,7 @@ describe('Clicking the button', () => {
 
     const button = screen.getByTestId('fact-button');
 
-    fireEvent.click(button );
+    fireEvent.click(button);
 
     await waitFor(() => expect(mockFetch).toBeCalledTimes(1));
   });

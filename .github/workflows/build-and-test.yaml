@@ -1,15 +1,27 @@
-name: Run a test suite with Docker Compose
+name: Tests
 
 on: 
   pull_request:
   workflow_dispatch:
 
 jobs:
-  build-and-test:
+  run-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Run Tests
-        run: docker-compose --profile test up --abort-on-container-exit
+      - name: Run API Tests
+        working-directory: ./test-api
+        run: |
+          npm i
+          npm test
+
+      - name: Run UI Tests
+        working-directory: ./test-client
+        run: |
+          npm i
+          npm test
+
+      - name: Run System Tests
+        run: npm test
