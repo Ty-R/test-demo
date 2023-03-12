@@ -4,7 +4,7 @@
   "description": "todo",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test"
+    "test": "docker-compose --profile test up --abort-on-container-exit"
   },
   "author": "",
   "license": "ISC",

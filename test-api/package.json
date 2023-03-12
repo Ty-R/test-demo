@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "ts-node app.ts",
-    "test": "NODE_ENV=test jest",
+    "test": "jest",
     "refresh-lock": "npm i --package-lock-only"
   },
   "dependencies": {

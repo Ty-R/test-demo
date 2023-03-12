@@ -5,4 +5,4 @@ COPY . /app
 
 RUN npm ci 
 
-CMD ["npm", "test"]
+CMD ["npx", "playwright", "test"]
