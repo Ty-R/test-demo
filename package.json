@@ -4,6 +4,7 @@
   "description": "todo",
   "main": "index.js",
   "scripts": {
+    "start": "docker-compose --profile local up",
     "test": "docker-compose --profile test up --abort-on-container-exit"
   },
   "author": "",

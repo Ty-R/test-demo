@@ -8,19 +8,12 @@ router.get('/facts', async (_req, res) => {
   return res.json(facts.map((fact) => fact.fact));
 });
 
-router.post('/fact/create', async (req, res) => {
-  const insert = new factsModel(req.body);
-
-  insert.save().then(() => {
+router.post('/facts/create', async (req, res) => {
+  factsModel.insertMany(req.body).then(() => {
     return res.json({ status: 'saved' });
-  }).catch((err: any) => {
+  }).catch(() => {
     return res.sendStatus(400);
   });
-});
-
-router.post('/facts/create', async (req, res) => {
-  await factsModel.insertMany(req.body);
-  return res.json({ status: 'saved' });
 });
 
 export default router;

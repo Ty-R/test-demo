@@ -56,8 +56,8 @@ describe('Fact service', () => {
   describe('Inserting animal facts', () => {
     test('Valid request inserts a document', async () => {
       await request(server)
-        .post('/fact/create')
-        .send({ fact: 'my new fact' });
+        .post('/facts/create')
+        .send([{ fact: 'my new fact' }]);
 
       const document = await factModel.findOne();
 
@@ -66,16 +66,16 @@ describe('Fact service', () => {
 
     test('Invalid request returns a 400', async () => {
       const response = await request(server)
-        .post('/fact/create')
-        .send({});
+        .post('/facts/create')
+        .send([{}]);
 
       expect(response.status).toEqual(400);
     });
 
     test('Unknown fields are not entered into a document', async () => {
       await request(server)
-        .post('/fact/create')
-        .send({ fact: 'my new fact', foo: 'bar' });
+        .post('/facts/create')
+        .send([{ fact: 'my new fact', foo: 'bar' }]);
       
       const document = await factModel.findOne();
 

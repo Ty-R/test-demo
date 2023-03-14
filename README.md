@@ -14,7 +14,7 @@ The frontend (`test-client/`) is driven by NextJS/React, and it is designed to f
 The facts themselves are held in a Mongo DB.
 
 > **Note**
-> To spin up the UI and API for local development, or for exploring the app, run: `docker-compose --profile local up` and navigate to http://localhost:3000 in the browser.
+> To spin up the UI and API for local development, or for exploring the app, run: `npm start` and navigate to http://localhost:3000 in the browser.
 
 ## Testing
 
