@@ -9,33 +9,28 @@ A repository containing a simple NextJS frontend and Express API with the intent
 
 ## The Application
 
-The frontend (`test-client/`) is driven by NextJS/React, and currently consists of a single component for fetching a random fact about an animal and renders that fact alongside an image of the animal. The Express-driven API (`test-api/`) is responsible for returning a random animal fact.
+The frontend (`test-client/`) is driven by NextJS/React, and it is designed to fetch random animal facts and render them. The Express-driven API (`test-api/`) is responsible for returning these facts.
+
+The facts themselves are held in a Mongo DB.
 
 > **Note**
-> To spin up the UI and API for local development, run: `docker-compose --profile local up`
+> To spin up the UI and API for local development, or for exploring the app, run: `npm start` and navigate to http://localhost:3000 in the browser.
 
 ## Testing
 
 The aim is to test this UI and API using a variety of different tools and techniques. It's worth bearing in mind that is will be an ongoing project to explore different approaches to testing, so some tests may overlap, and some areas may not yet be covered.
 
-| Service | Type of Testing | Tools/Techniques | Status |
-| - | - | - | - |
-| UI | Unit tests | • React test lib<br>• Jest | Started |
-| UI | Integration tests | • Pact<br>• Jest<br>• Axios | -- |
-| UI | System tests | • Playwright | Started |
-| UI | Visual tests | • BackstopJS | -- |
-| API | Unit tests | • Jest | -- |
-| API | Component tests | • Jest<br>• Supertest | Started |
-| API | Integration tests | • Pact<br>• Jest<br>• Axios | -- |
-
-## Usage
+### Usage
 
 ```sh
 # Run system tests
-test-project $ docker-compose --profile test up --abort-on-container-exit
+test-project $ npm test
+
+# Run API schema tests
+test-project/test-api $ npm test database/animal-facts.test.ts
 
 # Run API component tests
-test-project/test-api $ npm test
+test-project/test-api $ npm test tests/component.test.ts
 
 # Run FE unit tests
 test-project/test-client $ npm test

@@ -4,3 +4,4 @@ test-client/.next/
 **/.vscode
 **/coverage/
 **/dist
+bin/

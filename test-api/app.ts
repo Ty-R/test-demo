@@ -1,11 +1,13 @@
 import express from 'express';
 import * as dotenv from 'dotenv';
 import factRouter from './routes/facts';
+import mongoose from 'mongoose';
 
 dotenv.config()
 
 const {
-  PORT
+  PORT,
+  DATABASE_URL
 } = process.env;
 
 const app = express();
@@ -27,7 +29,7 @@ app.use(function(_err: any, _req: any, res: { sendStatus: (arg0: number) => void
 });
 
 if (require.main === module) {
-  app.listen(PORT);
+  mongoose.connect(DATABASE_URL as string).then(() => app.listen(PORT));
 }
 
 export default app;

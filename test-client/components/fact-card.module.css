@@ -1,0 +1,8 @@
+.factCard {
+  padding: 10px;
+  flex-basis: 30%;
+}
+
+.factHeading {
+  text-align: center;
+}

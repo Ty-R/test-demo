@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  api:
+    build: .
+    ports:
+      - 3001:3001
+
+  mongo:
+    image: mongo:4.0.27
+    volumes:
+      - ./database/animal-facts.json:/database/animal-facts.json
+      - ./database/seed.sh:/docker-entrypoint-initdb.d/seed.sh
+    environment:
+      - MONGO_INITDB_DATABASE=animal-facts
+    ports:
+      - 27017:27017

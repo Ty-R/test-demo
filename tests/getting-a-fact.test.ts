@@ -9,32 +9,20 @@ test('has title', async ({ page }) => {
 test('no fact is shown by default', async ({ page }) => {
   await page.goto('/');
 
-  const locator = page.getByTestId('fact-container');
+  const locator = page.getByTestId('fact-card-0');
 
   await expect(locator).not.toBeVisible();
 });
 
-test.describe('requesting a fact', () => {
+test.describe('requesting facts', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
 
-    await page.getByTestId('fact-button').click();
-  });
-
-  test('a name is rendered', async ({ page }) => {
-    const locator = page.getByTestId('fact-heading-1');
-  
-    await expect(locator).toBeVisible();
-  });
-
-  test('an image is rendered', async ({ page }) => {
-    const locator = page.getByTestId('fact-image');
-  
-    await expect(locator).toBeVisible();
+    await page.getByTestId('refresh-facts-button').click();
   });
 
   test('a fact is rendered', async ({ page }) => {
-    const locator = page.getByTestId('fact');
+    const locator = page.getByTestId('fact-0');
   
     await expect(locator).toBeVisible();
   });

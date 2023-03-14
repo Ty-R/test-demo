@@ -1,31 +1,40 @@
 import styles from './get-fact.module.css';
 import React, { useState } from 'react';
+import Link from 'next/link';
+import FactCard from './fact-card';
 
 function GetFact({ fetch }: { fetch: Function }) {
-  interface Vals {
-    name?: string,
-    fact?: string,
-    imgSrc?: string
-  }
-
-  const [value, setValue] = useState<Vals>({});
+  const [facts, setValue] = useState<String[]>([]);
 
   const updateState = async () => {
-    const fact = await fetch();
-    setValue(fact);
+    const facts = await fetch();
+    setValue(facts);
+  };
+
+  const factCards = (facts: String[]) => {
+    return facts.map((fact, index) => <FactCard index={ index } fact={ fact }></FactCard> )
   };
 
   return (
     <div className={styles.container}>
-      <button className={styles.button} onClick={ updateState } data-testid="fact-button">Get fact</button>
-      {value.fact && (
-        <div className={styles.container} data-testid="fact-container">
-          <h3 data-testid="fact-heading-1">{value.name}</h3>
-          <img src={value.imgSrc} alt="animal" data-testid="fact-image" width="300"></img>
-          <h4 data-testid="fact-heading-2">Fact</h4>
-          <span data-testid="fact">{value.fact}</span>
-        </div>
-      )}
+      <div>
+        <span
+          className={styles.iconButton}
+          role="button"
+          onClick={ updateState }
+          data-testid="refresh-facts-button"
+          title="Refresh facts">&#x21bb;</span>
+        <Link
+          href="/manage"
+          className={styles.iconButton}
+          role="button"
+          data-testid="manage-facts-button"
+          title="Manage facts">&#x2699;</Link>
+      </div>
+
+      <div className={styles.factContainer} data-testid="fact-container">
+        {facts.length ? factCards(facts) : 'No facts' }
+      </div>
     </div>
   );
 }
