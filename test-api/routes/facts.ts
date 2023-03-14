@@ -1,34 +1,26 @@
 import express from 'express';
-import animals from '../mocks/response';
+import factsModel from '../database/animal-facts.model';
 
 const router = express.Router();
 
-const randomItem = (items: any[]) => {
-  return items.sort(() => 0.5 - Math.random())[0];
-};
-
-const response = (animal: { id: string; name: string; facts: string[]; image: string; }) => {
-  return {
-    name: animal.name,
-    fact: randomItem(animal.facts),
-    imgSrc: animal.image
-  }
-};
-
-router.get('/fact', async (req, res) => {
-  res.json(response(randomItem(animals)));
+router.get('/facts', async (_req, res) => {
+  const facts = await factsModel.aggregate().sample(3);
+  return res.json(facts.map((fact) => fact.fact));
 });
 
-router.get('/fact/:animal', async (req, res) => {
-  const animal = animals.find((animal) => {
-    return animal.id === req.params.animal
+router.post('/fact/create', async (req, res) => {
+  const insert = new factsModel(req.body);
+
+  insert.save().then(() => {
+    return res.json({ status: 'saved' });
+  }).catch((err: any) => {
+    return res.sendStatus(400);
   });
+});
 
-  if (!animal) {
-    return res.sendStatus(404);
-  }
-
-  res.json(response(animal));
+router.post('/facts/create', async (req, res) => {
+  await factsModel.insertMany(req.body);
+  return res.json({ status: 'saved' });
 });
 
 export default router;

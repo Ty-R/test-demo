@@ -1,61 +1,85 @@
 import server from '../app';
+import factModel from '../database/animal-facts.model';
 import request from 'supertest';
-import { Response } from 'superagent';
+import { MongoMemoryServer } from 'mongodb-memory-server';
+import mongoose from 'mongoose';
 
-test('A request to an unknown endpoint', async () => {
-  const response = await request(server).get('/not-a-real-endpoint');
-  expect(response.status).toEqual(404);
-});
+let mongod: any;
 
-test('A fact request for an unknown animal', async () => {
-  const response = await request(server).get('/fact/alien');
-  expect(response.status).toEqual(404);
-});
-
-describe('A random fact request', () => {
-  let response: Response;
-
+describe('Fact service', () => {
   beforeAll(async () => {
-    response = await request(server).get('/fact');
+    mongod = await MongoMemoryServer.create();
+    await mongoose.connect(mongod.getUri() as string);
   });
 
-  it('responds with a 200 status code', () => {
-    expect(response.status).toEqual(200);
+  afterAll(async () => {
+    await mongoose.disconnect();
+    await mongod.stop();
   });
 
-  it('responds with an animal name', () => {
-    expect(response.body).toHaveProperty('name');
+  afterEach(async () => {
+    await mongoose.connection.dropDatabase();
   });
 
-  it('responds with an animal fact', () => {
-    expect(response.body).toHaveProperty('fact');
+  test('A 404 is returned when a request is made to an unknown endpoint', async () => {
+    const response = await request(server).get('/not-a-real-endpoint');
+    expect(response.status).toEqual(404);
+  });
+  
+  test('An empty array is returned when no facts are found', async () => {
+    const response = await request(server).get('/facts')
+    expect(response.body).toEqual([]);
   });
 
-  it('responds with an animal image', () => {
-    expect(response.body).toHaveProperty('imgSrc');
-  });
-});
+  test('Returned facts are capped at 3', async () => {
+    await factModel.insertMany([
+      { fact: 'Fact 1' },
+      { fact: 'Fact 2' },
+      { fact: 'Fact 3' },
+      { fact: 'Fact 4' }
+    ]);
 
-describe('A random fact request for a specific animal', () => {
-  let response;
-
-  beforeAll(async () => {
-    response = await request(server).get('/fact/cat');
-  });
-
-  it('responds with a 200 status code', () => {
-    expect(response.status).toEqual(200);
+    const response = await request(server).get('/facts');
+    expect(response.body.length).toEqual(3);
   });
 
-  it('responds with an animal name', () => {
-    expect(response.body).toHaveProperty('name');
+  test('Returns all facts if total is less than 3', async () => {
+    await factModel.insertMany([
+      { fact: 'Fact 1' },
+      { fact: 'Fact 2' },
+    ]);
+
+    const response = await request(server).get('/facts');
+    expect(response.body.length).toEqual(2);
   });
 
-  it('responds with an animal fact', () => {
-    expect(response.body).toHaveProperty('fact');
-  });
+  describe('Inserting animal facts', () => {
+    test('Valid request inserts a document', async () => {
+      await request(server)
+        .post('/fact/create')
+        .send({ fact: 'my new fact' });
 
-  it('responds with an animal image', () => {
-    expect(response.body).toHaveProperty('imgSrc');
+      const document = await factModel.findOne();
+
+      expect(document?.fact).toEqual('my new fact');
+    });
+
+    test('Invalid request returns a 400', async () => {
+      const response = await request(server)
+        .post('/fact/create')
+        .send({});
+
+      expect(response.status).toEqual(400);
+    });
+
+    test('Unknown fields are not entered into a document', async () => {
+      await request(server)
+        .post('/fact/create')
+        .send({ fact: 'my new fact', foo: 'bar' });
+      
+      const document = await factModel.findOne();
+
+      expect(document).not.toHaveProperty('foo');
+    });
   });
 });

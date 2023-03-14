@@ -4,22 +4,25 @@
   align-items: center;
 }
 
-.button {
-  align-items: center;
-  background-color: #fff;
-  border: 2px solid #000;
-  box-sizing: border-box;
-  color: #000;
+.iconButton {
+  font-family: Lucida Sans Unicode;
+  font-size: x-large;
+  font-weight: bolder;
   cursor: pointer;
-  display: inline-flex;
-  fill: #000;
-  font-size: 16px;
-  font-weight: 600;
-  height: 48px;
-  justify-content: center;
-  letter-spacing: -.8px;
-  line-height: 24px;
-  min-width: 140px;
-  outline: 0;
-  padding: 0 17px;
+  margin: 10px;
+  color: black;
+  text-decoration: none;
+  user-select: none;
+}
+
+.iconButton:hover {
+  color: blue;
+}
+
+.factHeading {
+  margin: 10px;
+}
+
+.factContainer {
+  display: flex;
 }
