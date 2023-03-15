@@ -3,9 +3,19 @@ import factsModel from '../database/animal-facts.model';
 
 const router = express.Router();
 
-router.get('/facts', async (_req, res) => {
-  const facts = await factsModel.aggregate().sample(3);
-  return res.json(facts.map((fact) => fact.fact));
+const facts = async (count: any) => {
+  const int = parseInt(count);
+
+  if (int && int >= 0) {
+    return factsModel.aggregate().sample(parseInt(count));
+  } else {
+    return factsModel.find();
+  }
+};
+
+router.get('/facts', async (req, res) => {
+  const response = await facts(req.query.count);
+  return res.json(response.map((fact) => fact.fact));
 });
 
 router.post('/facts/create', async (req, res) => {
