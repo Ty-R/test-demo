@@ -31,25 +31,54 @@ describe('Fact service', () => {
     expect(response.body).toEqual([]);
   });
 
-  test('Returned facts are capped at 3', async () => {
+  test('An empty array is returned when no facts are found with ?count=', async () => {
+    const response = await request(server).get('/facts?count=5')
+    expect(response.body).toEqual([]);
+  });
+
+  test('A negative ?count= is ignored', async () => {
+    const response = await request(server).get('/facts?count=-1')
+    expect(response.body).toEqual([]);
+  });
+
+  test('A non-int ?count= is ignored', async () => {
+    const response = await request(server).get('/facts?count=a')
+    expect(response.body).toEqual([]);
+  });
+
+  test('All facts returned when ?count= is undefined', async () => {
     await factModel.insertMany([
       { fact: 'Fact 1' },
       { fact: 'Fact 2' },
       { fact: 'Fact 3' },
-      { fact: 'Fact 4' }
+      { fact: 'Fact 4' },
+      { fact: 'Fact 5' }
     ]);
 
     const response = await request(server).get('/facts');
-    expect(response.body.length).toEqual(3);
+    expect(response.body.length).toEqual(5);
   });
 
-  test('Returns all facts if total is less than 3', async () => {
+  test('Limited facts returned when ?count= is defined', async () => {
+    await factModel.insertMany([
+      { fact: 'Fact 1' },
+      { fact: 'Fact 2' },
+      { fact: 'Fact 3' },
+      { fact: 'Fact 4' },
+      { fact: 'Fact 5' }
+    ]);
+
+    const response = await request(server).get('/facts?count=2');
+    expect(response.body.length).toEqual(2);
+  });
+
+  test('Returns all facts when ?count= is greater than total facts', async () => {
     await factModel.insertMany([
       { fact: 'Fact 1' },
       { fact: 'Fact 2' },
     ]);
 
-    const response = await request(server).get('/facts');
+    const response = await request(server).get('/facts?count=5');
     expect(response.body.length).toEqual(2);
   });
 

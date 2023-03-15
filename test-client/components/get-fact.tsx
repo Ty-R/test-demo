@@ -7,7 +7,7 @@ function GetFact({ fetch }: { fetch: Function }) {
   const [facts, setValue] = useState<String[]>([]);
 
   const updateState = async () => {
-    const facts = await fetch();
+    const facts = await fetch({ count: 3 });
     setValue(facts);
   };
 
