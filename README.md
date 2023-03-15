@@ -20,11 +20,11 @@ The app is quite simple - it will display 3 refreshable animal facts to the user
 
 ## Testing
 
-The aim is to test this UI and API using a variety of different tools and techniques. It's worth bearing in mind that is will be an ongoing project to explore different approaches to testing, so some tests may overlap, and some areas may not yet be covered.
+The aim is to test this UI and API using a variety of different tools and techniques. It's worth bearing in mind that this will be an ongoing project to explore different approaches to testing, so some tests may overlap, and some areas may not yet be covered.
 
 ### Usage
 
-Both the UI and API have their own respective tests, and in order to run those, you need to `cd` to their corresponding directories.
+Both the UI and API have their own respective tests, and in order to run those, you need to `cd` to their directories.
 
 ```sh
 # Run system tests
