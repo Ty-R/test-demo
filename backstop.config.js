@@ -18,11 +18,11 @@ const viewports = [
 const scenarioDefaults = {
   url: BASE_URL,
   facts: [
-    "Super interesting fact about aa particular animal",
-    "Super interesting fact about aa particular animal",
-    "Super interesting fact about aa particular animal"
+    "Super interesting fact about a particular animal",
+    "Super interesting fact about a particular animal",
+    "Super interesting fact about a particular animal"
   ],
-  delay: 500
+  delay: 500 // investigate the need for this
 };
 
 const scenarios = [
