@@ -5,3 +5,5 @@ test-client/.next/
 **/coverage/
 **/dist
 bin/
+backstop-data/bitmaps_test
+backstop-data/*_report
