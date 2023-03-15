@@ -1,15 +1,26 @@
-import Link from 'next/link';
+import Head from 'next/head';
 import React from 'react';
+import Layout from '../components/layout';
+import fetchFact from '../communications/api';
+import ManageFacts from '../components/manage-facts';
 
-export default function MAnage() {
-  // todo
+// TODO
+
+export async function getServerSideProps() {
+  const facts = await fetchFact();
+
+  return {
+    props: { facts },
+  }
+}
+
+export default function Manage({ facts }) {
   return (
-    <div>
-      <Link
-        href="/"
-        role="button"
-        data-testid="manage-facts-button"
-        title="Manage facts">back</Link>
-    </div>
+    <Layout>
+      <Head>
+        <title>Manage Facts</title>
+      </Head>
+      <ManageFacts facts={ facts }></ManageFacts>
+    </Layout>
   );
 };

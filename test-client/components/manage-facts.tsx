@@ -2,6 +2,8 @@ import styles from './get-fact.module.css';
 import React from 'react';
 import Link from 'next/link';
 
+// TODO
+
 function ManageFacts({ facts }: { facts: String[] }) {
   const factCards = (facts: String[]) => {
     return facts.map((fact, index) => <div key={index}>{fact} [delete]</div>)
