@@ -2,16 +2,18 @@
 
 ![example workflow](https://github.com/Ty-R/test-demo/actions/workflows/build-and-test.yaml/badge.svg)
 
-A repository containing a simple NextJS frontend and Express API with the intention of testing them with a variety of approaches.
+This project exists primarily for me to tinker and experiment with different approaches to automated testing/QA. The main application is a simple NextJS frontend, an Express API, and a Mongo DB.
 
 > **Note**
-> This is an ongoing project. The application and tests within will certainly evolve as I learn more about best practices, or think of different challenges that I want to tackle.
+> This is an ongoing project. The application, and tests, will certainly evolve as I learn more about best practices, or think of different challenges that I want to tackle.
+
+* [The Application](#the-application)
+* [Testing](#testing)
+  * [Usage](#usage)
 
 ## The Application
 
-The frontend (`test-client/`) is driven by NextJS/React, and it is designed to fetch random animal facts and render them. The Express-driven API (`test-api/`) is responsible for returning these facts.
-
-The facts themselves are held in a Mongo DB.
+The app is quite simple - it will display 3 refreshable animal facts to the user. The plan is to also create an interface for managing facts.
 
 > **Note**
 > To spin up the UI and API for local development, or for exploring the app, run: `npm start` and navigate to http://localhost:3000 in the browser.
@@ -21,6 +23,8 @@ The facts themselves are held in a Mongo DB.
 The aim is to test this UI and API using a variety of different tools and techniques. It's worth bearing in mind that is will be an ongoing project to explore different approaches to testing, so some tests may overlap, and some areas may not yet be covered.
 
 ### Usage
+
+Both the UI and API have their own respective tests, and in order to run those, you need to `cd` to their corresponding directories.
 
 ```sh
 # Run system tests
@@ -34,4 +38,7 @@ test-project/test-api $ npm test tests/component.test.ts
 
 # Run FE unit tests
 test-project/test-client $ npm test
+
+# Run FE visual tests
+test-project/test-client $ npm bitmaps:test
 ```

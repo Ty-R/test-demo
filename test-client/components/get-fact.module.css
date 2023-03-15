@@ -26,3 +26,10 @@
 .factContainer {
   display: flex;
 }
+
+@media only screen and (max-width: 600px) {
+  .factContainer {
+    flex-direction: column;
+    text-align: center;
+  }
+}

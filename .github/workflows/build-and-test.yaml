@@ -25,3 +25,6 @@ jobs:
 
       - name: Run System Tests
         run: npm test
+
+      - name: Run Visual Tests
+        run: npm run bitmaps:test
