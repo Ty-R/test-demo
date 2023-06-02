@@ -6,4 +6,4 @@ steps:
   entrypoint: npm
   args: ['test']
 options:
-  logging: NONE
+  logging: CLOUD_LOGGING_ONLY
