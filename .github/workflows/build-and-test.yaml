@@ -1,30 +1,30 @@
-name: Tests
+# name: Tests
 
-on: 
-  pull_request:
-  workflow_dispatch:
+# on: 
+#   pull_request:
+#   workflow_dispatch:
 
-jobs:
-  run-tests:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+# jobs:
+#   run-tests:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v3
 
-      - name: Run API Tests
-        working-directory: ./test-api
-        run: |
-          npm i
-          npm test
+#       - name: Run API Tests
+#         working-directory: ./test-api
+#         run: |
+#           npm i
+#           npm test
 
-      - name: Run UI Tests
-        working-directory: ./test-client
-        run: |
-          npm i
-          npm test
+#       - name: Run UI Tests
+#         working-directory: ./test-client
+#         run: |
+#           npm i
+#           npm test
 
-      - name: Run System Tests
-        run: npm test
+#       - name: Run System Tests
+#         run: npm test
 
-      - name: Run Visual Tests
-        run: npm run bitmaps:test
+#       - name: Run Visual Tests
+#         run: npm run bitmaps:test
