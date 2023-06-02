@@ -1,9 +1,15 @@
+# steps:
+# - name: node
+#   entrypoint: npm
+#   args: ['install']
+# - name: node
+#   entrypoint: npm
+#   args: ['test']
+# options:
+#   logging: CLOUD_LOGGING_ONLY
+
 steps:
-- name: node
-  entrypoint: npm
-  args: ['install']
-- name: node
-  entrypoint: npm
-  args: ['test']
-options:
-  logging: CLOUD_LOGGING_ONLY
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'test', '.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['run', '--rm', 'test']
